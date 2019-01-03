@@ -27,8 +27,6 @@ Encryption and hashing are commonly confused terms. They mean similar things, bu
 
 #### 1. Each person should come up with an example of how encryption is used in real life. There are many to choose from!
 
-<br><br>
-
 <details>
   <summary>Question: What are some examples of encryption?</summary>
   <br>
@@ -43,8 +41,6 @@ Encryption and hashing are commonly confused terms. They mean similar things, bu
   <br><br>
   The thing to notice here is that the data will be deciphered and used again in some way. That credit card number is run again next time you make an order. Your server needs access to your form data. Your military needs to receive your orders.
 </details>
-
-<br><br>
 
 #### 2. Each person should come up with an example of how hashing is used in real life. 
 
