@@ -7,6 +7,7 @@
 * Grab a computer
 * Grab a buddy - this can be a partner exercise! (still turn in separately if you do, though!)
 * Fork and clone this repository
+* Run `npm install`
 * Read through the lab and answer the questions
 * Do the code exercise at the end of this lab
 
@@ -137,9 +138,112 @@ The moral of the story is not to use `password` as your password exactly because
 
 ## Code Activity
 
-Now that we know a little something about hashing, let's actually dig into BCrypt and take it for a spin.
+Now that we know a little something about hashing, let's actually dig into BCrypt and take it for a spin. Our goal is to make a program that runs on the command line, asks a user for a name and password, hashes the password, then asks the user to retype the password. It should then compare the hashes and tell you whether you got it correct.
+
+### Sample Outputs
+
+Wrong password:
+
+```
+Hi, what is your name? <user types: Brandi>
+Hi Brandi. What is your password? <user types: password>
+Can you tell me your password again? <user types: wrongpassword>
+No, I'm sorry that wasn't a match with the first password you gave me.
+```
+
+Correct password:
+
+```
+Hi, what is your name? <user types: Brandi>
+Hi Brandi. What is your password? <user types: password>
+Can you tell me your password again? <user types: password>
+Great! Your passwords matched!
+```
+
+### Directions
+
+First things first, we need to be able to accept user input directly from the terminal. Let's use the [readline-sync](https://www.npmjs.com/package/readline-sync) module for that. Here's a basic use-case where the prompt asks you for your name and then says hi to you. Copy this code into `app.js` and try running it with the command `node app.js`. 
+
+```javascript
+var readlineSync = require('readline-sync');
+ 
+// Wait for user's response.
+var userName = readlineSync.question('May I have your name? ');
+console.log('Hi ' + userName + '!');
+```
+
+> HINT: If you get an error message saying you "can't find module readline-sync", make sure you remembered to run `npm install` first 
+
+#### Fancy Passwords!
+
+This module has the ability to hide typed in text with *** like a password. Simply pass the option `hideEchoBack` and set to true.
+ 
+```javascript
+var readlineSync = require('readline-sync');
+
+// Handle the secret text (e.g. password).
+var favFood = readlineSync.question('What is your favorite food? ', {
+  hideEchoBack: true // The typed text on screen is hidden by `*` (default).
+});
+console.log('Oh, you love ' + favFood + '!');
+```
+
+Make sure this code runs too!
+
+#### Getting into BCrypt
+
+Check out [bcrypt on npmjs.com](https://www.npmjs.com/package/bcrypt). There are several uses shown here. The main decision to make is whether to use synchronous or asynchronous versions of the methods. Asynchronous is typically recommended for servers because hashing is CPU-intensive, but for our purposes, the synchronous methods will do just fine.
+
+> NOTE: In the example below, normally this is the point where you'd save the hashed password to your database, but in this case we'll just store it in a local variable called `hashedPassword` instead.
+
+```javascript
+var bcrypt = require('bcrypt');
+var saltRounds = 10;
+var myPlaintextPassword = 'password';
+var someOtherPlaintextPassword = 'not_password';
+
+// Generate the hashed password
+var hashedPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+
+// Print it out
+console.log('Hashed password is', hashedPassword);
+```
+
+Go ahead and copy this over into `app.js` and run this program a few times. You can comment/delete the stuff we had in there earlier. Notice that since the salt is randomly generated, your hashed password is different each time even though you're using the same password.
+
+#### Comparing hashed passwords with plain text passwords
+
+For comparing a hashed password to a newly typed in plain text password, we can use bcrypt's compareSync function. This takes the hashed password (so it has the salt) and the plain text password as arguments. What it's doing is hashing the plain text password with the same salt as the hashed password and then seeing if they match. It returns a boolean.
+
+Correct Password Example:
+
+```javascript
+// Result will be true. Passwords match.
+var result = bcrypt.compareSync(myPlaintextPassword, hashedPassword); 
+```
+
+Incorrect Password Example: 
+
+```javascript
+// Result will be false. No match.
+var result = bcrypt.compareSync(someOtherPlaintextPassword, hashedPassword); 
+```
+
+#### Put it all together
+
+Now that you have the tools to read text from the command line with readline-sync and to hash and compare hashed passwords with bcrypt, put the two together. Write code in `app.js` to perform the following:
+
+* Ask the user for a name
+* Print "hi" + user's name
+* Ask the user for a password
+* Hash the password the user gives and store it in a local variable
+* Ask the user to type in their password again
+* Compare the hashed password to the retyped in password. 
+* Depending on whether the user typed in the same password or a different one, print out an appropriate message.
 
 ## Resources
 
 * [Understanding Hashes](https://www.wordfence.com/learn/how-passwords-work-and-cracking-passwords/)
 * [Bcrypt Salts](https://stackoverflow.com/questions/6832445/how-can-bcrypt-have-built-in-salts)
+* [Readline-Sync](https://www.npmjs.com/package/readline-sync)
+* [Interactive Node Programs](https://flaviocopes.com/node-input-from-cli/)
