@@ -5,9 +5,10 @@
 ## Directions
 
 * Grab a computer
-* Grab a buddy - this is a partner exercise!
-* Read through the lab and answer the questions together
-* Do the code exercise at the end of this lab together
+* Grab a buddy - this can be a partner exercise! (still turn in separately if you do, though!)
+* Fork and clone this repository
+* Read through the lab and answer the questions
+* Do the code exercise at the end of this lab
 
 ### Encryption vs Hashing
 
@@ -15,12 +16,12 @@ Encryption and hashing are commonly confused terms. They mean similar things, bu
 
 <details>
   <summary>Question: What is the opposite of encryption?</summary>
-  Decryption. Encryption is a process that can be reversed! This is often done with public-private key pairs.
+  <br>Decryption. Encryption is a process that can be reversed! This is often done with public-private key pairs.
 </details>
 
 <details>
   <summary>Question: What is the opposite of hashing?</summary>
-  There isn't one. Hashing is a process that cannot be reversed!
+  <br>There isn't one. Hashing is a process that cannot be reversed!
 </details>
 
 ### Real Life Examples
@@ -62,8 +63,54 @@ So, encryption and hashing are both things we use all the time. Encryption is a 
 
 But wait....
 
-#### If you sign up for a login / password on a website and your password gets hashed, how can you login when you come back next time? 
+#### If I sign up for a login / password on a website and my password gets hashed, how can I login when I come back next time? 
 
 This is a good question! The answer is that the company stores the hashed password. Here's a postico snippet of what a hashed password is normally stored as. 
 
 <img src="https://res.cloudinary.com/briezh/image/upload/v1546559658/Screen_Shot_2019-01-03_at_3.52.10_PM_zkqmhm.png">
+
+So basically, they store the **hash** of the password, not the password itself.
+
+### I still don't see how this helps?
+
+Let's do a short exercise that hashes our names to demonstrate how a hashing function works.
+
+#### 1. Write down your name. 
+
+If you're working with a partner, have your partner do this with their name too.
+
+#### 2. For each letter in your name, write down the order it appears in the alphabet. (e.g., for A write 1, for B write 2, etc.)
+
+For example, `Brandi` would change to `2-18-1-14-4-9`.
+
+#### 3. Take each number and mod it by 8. (divide by 8, but take the remainder instead of the quotient)
+
+For example, `2-18-1-14-4-9` becomes `2-2-1-6-4-1`. 
+
+#### 4. Change any instance of 6, 7, or 8 to the letter 'f'
+
+For example, `2-2-1-6-4-1` becomes `2-2-1-f-4-1`
+
+#### 5. Any time there are consecutive numbers (2 of the same number in a row), change it to a capital 'A' followed by an exclamation point.
+
+For example, `2-2-1-f-4-1` becomes `A!-1-f-4-1`
+
+#### 6. Concatenate all the characters together
+
+For example `A!-1-f-4-1` becomes `A!1f41`. So, according to our hash function, `Brandi` becomes `A!1f41`. What's your hashed name?
+
+#### 7. Take your answer and write it in the `answers.txt` file.
+
+You can find answers.txt in this repository. If you haven't done so already, please fork and clone this repo.
+
+#### 8. Repeat steps 1 through 7 with your name again. Record your new answer in answers.txt
+
+<details>
+  <summary>Question: Can I recompute a hash?</summary>
+  <br>Yep! That's how this all works. For hash tables we can depend on the hash function to compute the same memory location each time, and for passwords we can rely on the hashed password to be the same each time.
+</details>
+
+
+### Another Problem
+
+Okay. Sooooooo... 
