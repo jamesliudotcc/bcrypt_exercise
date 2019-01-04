@@ -120,7 +120,7 @@ This is totally a thing. It's called a [Rainbow Table](https://www.wordfence.com
 
 ### Extra Security?! Oh boy...
 
-Don't worry! The creators of BCrypt have thought of this too. The additional security is already baked in. 
+Don't worry! The creators of BCrypt have thought of this too. The additional security is already baked in. You don't have to do anything extra! But let's discuss what's going on and why this is necessary.
 
 #### Let's get salty!
 
