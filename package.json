@@ -1,0 +1,25 @@
+{
+  "name": "bcrypt_exercise",
+  "version": "1.0.0",
+  "description": "[BCrypt](https://en.wikipedia.org/wiki/Bcrypt) is a password hashing function. This is a process where you take sensitive data and scramble it with an algorithm. We don't need to know the implementation of this algorithm. BCrypt has been used since 1999, and has implementations in many languages, so we know it's trustworthy at this point!",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^3.0.3",
+    "readline-sync": "^1.4.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WDI-SEA/bcrypt_exercise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WDI-SEA/bcrypt_exercise/issues"
+  },
+  "homepage": "https://github.com/WDI-SEA/bcrypt_exercise#readme"
+}
