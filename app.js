@@ -20,14 +20,18 @@ function getMatchedPasswords() {
   let password1 = readlineSync.question('Set a password: ', {
     hideEchoBack: true,
   });
-  let hashedPassword1 = bcrypt.hashSync(password1, saltRounds);
-  let password2 = readlineSync.question('Retype password: ', {
-    hideEchoBack: true,
+  bcrypt.hash(password1, saltRounds).then(hash => {
+    let hashedPassword1 = hash;
+    let password2 = readlineSync.question('Retype password: ', {
+      hideEchoBack: true,
+    });
+    bcrypt.compare(password2, hashedPassword1).then(match => {
+      if (match) {
+        console.log('Passwords match');
+      } else {
+        console.log('Passwords do not match');
+        getMatchedPasswords();
+      }
+    });
   });
-  if (bcrypt.compareSync(password2, hashedPassword1)) {
-    console.log('Passwords match');
-  } else {
-    console.log('Passwords do not match');
-    getMatchedPasswords();
-  }
 }
