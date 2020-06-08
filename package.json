@@ -4,7 +4,7 @@
   "description": "[BCrypt](https://en.wikipedia.org/wiki/Bcrypt) is a password hashing function. This is a process where you take sensitive data and scramble it with an algorithm. We don't need to know the implementation of this algorithm. BCrypt has been used since 1999, and has implementations in many languages, so we know it's trustworthy at this point!",
   "main": "app.js",
   "dependencies": {
-    "bcrypt": "^3.0.3",
+    "bcrypt": "^5.0.0",
     "readline-sync": "^1.4.9"
   },
   "devDependencies": {},
